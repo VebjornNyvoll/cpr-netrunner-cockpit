@@ -1,0 +1,42 @@
+{
+  "id": "cpr-netrunner-cockpit",
+  "title": "Netrunner Cockpit",
+  "description": "A player-facing NET Action economy tracker for Cyberpunk Red netrunners. Enforces correct NET Action spending per turn by wrapping the cyberpunk-red-core system's native Interface ability and program roll flows. Architecture-agnostic — purely a counter, action buttons, rezzed-programs view, and turn log. Netrunner-role-gated with a manual jacked-in toggle.",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Vebjørn Nyvoll",
+      "url": "https://github.com/VebjornNyvoll"
+    }
+  ],
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12",
+    "maximum": "13"
+  },
+  "esmodules": ["scripts/main.mjs"],
+  "styles": ["styles/module.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "cyberpunk-red-core",
+        "type": "system",
+        "compatibility": {
+          "minimum": "0.89.1",
+          "verified": "0.89.2"
+        }
+      }
+    ]
+  },
+  "url": "https://github.com/VebjornNyvoll/cpr-netrunner-cockpit",
+  "manifest": "https://github.com/VebjornNyvoll/cpr-netrunner-cockpit/releases/latest/download/module.json",
+  "download": "https://github.com/VebjornNyvoll/cpr-netrunner-cockpit/releases/download/v0.1.0/module.zip",
+  "bugs": "https://github.com/VebjornNyvoll/cpr-netrunner-cockpit/issues"
+}

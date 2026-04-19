@@ -1,0 +1,8 @@
+{
+  "cpr-netrunner-cockpit": {
+    "settings": {
+      "enabled": "Enable Module",
+      "enabledHint": "Toggle this module's features on or off."
+    }
+  }
+}
