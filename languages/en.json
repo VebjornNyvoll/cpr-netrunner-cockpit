@@ -1,8 +1,70 @@
 {
   "cpr-netrunner-cockpit": {
     "settings": {
-      "enabled": "Enable Module",
-      "enabledHint": "Toggle this module's features on or off."
+      "enabled": {
+        "name": "Enable Netrunner Cockpit",
+        "hint": "Toggle this module's features on or off."
+      },
+      "autoOpen": {
+        "name": "Auto-open on Your Turn",
+        "hint": "Automatically open the cockpit when your netrunner's turn starts in combat."
+      },
+      "alwaysShow": {
+        "name": "Always Show While Jacked In",
+        "hint": "Keep the cockpit window open whenever you are jacked in, not just on your turn."
+      },
+      "allowNegative": {
+        "name": "Allow Negative NET Action Counter",
+        "hint": "If disabled, ability buttons are blocked when the counter reaches zero."
+      },
+      "actionCosts": {
+        "name": "Action Cost Table",
+        "hint": "Configured per-ability via the module API or macro."
+      }
+    },
+    "window": {
+      "title": "Netrunner Cockpit",
+      "jackedIn": "Jacked In",
+      "notJackedIn": "Not Jacked In",
+      "noCyberdeck": "No equipped cyberdeck",
+      "actionsRemaining": "NET Actions Remaining",
+      "abilitiesHeader": "Interface Abilities",
+      "programsHeader": "Rezzed Programs",
+      "turnLogHeader": "Turn Log",
+      "turnLogEmpty": "No actions taken this turn.",
+      "noPrograms": "No programs rezzed.",
+      "paused": "Auto-deduct paused",
+      "jackOut": "Jack Out",
+      "resetTurn": "Reset turn counter",
+      "togglePause": "Pause auto-deduct",
+      "manualPlus": "Refund 1 NET Action",
+      "manualMinus": "Manually spend 1 NET Action",
+      "manualSpend": "Manual spend",
+      "programAtk": "Program Attack",
+      "programDef": "Program Defense",
+      "programDmg": "Program Damage",
+      "costLabel": "Cost"
+    },
+    "sheet": {
+      "jackInLabel": "Jack In",
+      "jackedInLabel": "Jacked In"
+    },
+    "notifications": {
+      "noCyberdeck": "No equipped cyberdeck — equip a deck before rolling Interface abilities.",
+      "notJackedIn": "Not jacked in — jack in from the character sheet or token HUD first.",
+      "outOfActions": "No NET Actions remaining this turn.",
+      "jackedOut": "{name} has jacked out."
+    },
+    "abilities": {
+      "scannerDesc": "Reveal all contents on the current floor.",
+      "backdoorDesc": "Unlock a password-protected control node.",
+      "cloakDesc": "Hide from Black ICE and system traces.",
+      "controlDesc": "Take control of a system element (camera, door, etc.).",
+      "eyedeeDesc": "Identify an encrypted or hidden file.",
+      "pathfinderDesc": "Reveal the map of the current floor.",
+      "slideDesc": "Escape from a Black ICE attacker.",
+      "virusDesc": "Corrupt a control node and erase its function.",
+      "zapDesc": "Deliver an attack of last resort against Black ICE."
     }
   }
 }

@@ -1,0 +1,131 @@
+<div class="cockpit-root">
+  <header class="cockpit-header">
+    <img class="cockpit-portrait" src="{{actorImg}}" alt="{{actorName}}" />
+    <div class="cockpit-header-main">
+      <div class="cockpit-actor-name">{{actorName}}</div>
+      <div class="cockpit-status-row">
+        <span class="cockpit-dot {{#if jackedIn}}on{{else}}off{{/if}}"></span>
+        {{#if jackedIn}}
+          <span class="cockpit-status-text">{{localize "cpr-netrunner-cockpit.window.jackedIn"}}</span>
+        {{else}}
+          <span class="cockpit-status-text">{{localize "cpr-netrunner-cockpit.window.notJackedIn"}}</span>
+        {{/if}}
+        {{#if hasCyberdeck}}
+          <span class="cockpit-deck-name" title="{{cyberdeckName}}">{{cyberdeckName}}</span>
+        {{else}}
+          <span class="cockpit-deck-missing">{{localize "cpr-netrunner-cockpit.window.noCyberdeck"}}</span>
+        {{/if}}
+      </div>
+    </div>
+  </header>
+
+  <section class="cockpit-counter">
+    <div class="cockpit-counter-readout">
+      <span class="cockpit-counter-remaining">{{remaining}}</span>
+      <span class="cockpit-counter-slash">/</span>
+      <span class="cockpit-counter-total">{{rank}}</span>
+    </div>
+    <div class="cockpit-counter-label">
+      {{localize "cpr-netrunner-cockpit.window.actionsRemaining"}}
+    </div>
+    <div class="cockpit-pips">
+      {{#each pips}}
+        <span class="cockpit-pip {{#if spent}}spent{{/if}}"></span>
+      {{/each}}
+    </div>
+    <div class="cockpit-manual-controls">
+      <button type="button" data-action="minusOne" data-tooltip="{{localize 'cpr-netrunner-cockpit.window.manualMinus'}}"><i class="fas fa-minus"></i></button>
+      <button type="button" data-action="plusOne" data-tooltip="{{localize 'cpr-netrunner-cockpit.window.manualPlus'}}"><i class="fas fa-plus"></i></button>
+      <button type="button" data-action="resetTurn" data-tooltip="{{localize 'cpr-netrunner-cockpit.window.resetTurn'}}"><i class="fas fa-undo"></i></button>
+      <button type="button" data-action="togglePause" class="{{#if autoDeductPaused}}active{{/if}}" data-tooltip="{{localize 'cpr-netrunner-cockpit.window.togglePause'}}"><i class="fas fa-pause"></i></button>
+    </div>
+    {{#if autoDeductPaused}}
+      <div class="cockpit-paused-banner">
+        <i class="fas fa-pause"></i> {{localize "cpr-netrunner-cockpit.window.paused"}}
+      </div>
+    {{/if}}
+  </section>
+
+  <section class="cockpit-abilities">
+    <h3 class="cockpit-section-header">{{localize "cpr-netrunner-cockpit.window.abilitiesHeader"}}</h3>
+    <div class="cockpit-ability-grid">
+      {{#each abilities}}
+        <button
+          type="button"
+          class="cockpit-ability-btn"
+          data-action="rollAbility"
+          data-ability="{{key}}"
+          {{#if disabled}}disabled{{/if}}
+          data-tooltip="{{localize descriptionKey}}"
+        >
+          <i class="fas {{icon}}"></i>
+          <span class="cockpit-ability-label">{{label}}</span>
+          {{#if showCost}}
+            <span class="cockpit-ability-cost">{{cost}}</span>
+          {{/if}}
+        </button>
+      {{/each}}
+    </div>
+  </section>
+
+  <section class="cockpit-programs">
+    <h3 class="cockpit-section-header">
+      {{localize "cpr-netrunner-cockpit.window.programsHeader"}}
+      <span class="cockpit-section-count">({{rezzedCount}}/{{installedCount}})</span>
+    </h3>
+    {{#if programs.length}}
+      <ul class="cockpit-program-list">
+        {{#each programs}}
+          <li class="cockpit-program-row">
+            <img class="cockpit-program-icon" src="{{img}}" alt="{{name}}" data-action="openProgram" data-program-id="{{id}}" />
+            <div class="cockpit-program-info">
+              <div class="cockpit-program-name">{{name}}</div>
+              <div class="cockpit-program-stats">
+                {{#if hasAtk}}<span class="cockpit-stat">ATK {{atk}}</span>{{/if}}
+                {{#if hasDef}}<span class="cockpit-stat">DEF {{def}}</span>{{/if}}
+                {{#if hasDmg}}<span class="cockpit-stat">DMG {{damage}}</span>{{/if}}
+                {{#if rezMax}}<span class="cockpit-stat">REZ {{rezValue}}/{{rezMax}}</span>{{/if}}
+              </div>
+            </div>
+            <div class="cockpit-program-actions">
+              {{#if hasAtk}}
+                <button type="button" data-action="rollProgram" data-program-id="{{id}}" data-execution-type="atk" data-tooltip="{{localize 'cpr-netrunner-cockpit.window.programAtk'}}">ATK</button>
+              {{/if}}
+              {{#if hasDef}}
+                <button type="button" data-action="rollProgram" data-program-id="{{id}}" data-execution-type="def" data-tooltip="{{localize 'cpr-netrunner-cockpit.window.programDef'}}">DEF</button>
+              {{/if}}
+              {{#if hasDmg}}
+                <button type="button" data-action="rollProgram" data-program-id="{{id}}" data-execution-type="damage" data-tooltip="{{localize 'cpr-netrunner-cockpit.window.programDmg'}}">DMG</button>
+              {{/if}}
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    {{else}}
+      <div class="cockpit-empty">{{localize "cpr-netrunner-cockpit.window.noPrograms"}}</div>
+    {{/if}}
+  </section>
+
+  <section class="cockpit-turnlog">
+    <h3 class="cockpit-section-header">{{localize "cpr-netrunner-cockpit.window.turnLogHeader"}}</h3>
+    {{#if turnLog.length}}
+      <ol class="cockpit-turnlog-list">
+        {{#each turnLog}}
+          <li class="cockpit-turnlog-entry type-{{type}}">
+            <span class="cockpit-turnlog-label">{{label}}</span>
+            {{#if cost}}<span class="cockpit-turnlog-cost">-{{cost}}</span>{{/if}}
+          </li>
+        {{/each}}
+      </ol>
+    {{else}}
+      <div class="cockpit-empty cockpit-turnlog-empty">{{localize "cpr-netrunner-cockpit.window.turnLogEmpty"}}</div>
+    {{/if}}
+  </section>
+
+  <footer class="cockpit-footer">
+    <button type="button" data-action="jackOut" class="cockpit-jack-out" {{#unless jackedIn}}disabled{{/unless}}>
+      <i class="fas fa-plug"></i>
+      {{localize "cpr-netrunner-cockpit.window.jackOut"}}
+    </button>
+  </footer>
+</div>

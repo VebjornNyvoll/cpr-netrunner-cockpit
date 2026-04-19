@@ -1,26 +1,60 @@
-const MODULE_ID = "cpr-netrunner-cockpit";
+import { MODULE_ID, FLAGS, SETTINGS } from "./constants.mjs";
+import { registerSettings } from "./settings.mjs";
+import { registerHooks } from "./hooks.mjs";
+import {
+  openCockpitForActor,
+  getOpenCockpit,
+  closeAllCockpits,
+} from "./apps/NetrunnerCockpit.mjs";
+import {
+  getInterfaceRank,
+  getEquippedCyberdeck,
+  getNetRole,
+  getRezzedPrograms,
+  isNetrunner,
+} from "./utils/cpr-bridge.mjs";
+import {
+  isJackedIn,
+  setJackedIn,
+  resetTurn,
+  getActionsSpent,
+  getRemainingActions,
+} from "./utils/cockpit-state.mjs";
 
-/**
- * Initialize module - register settings, hooks, and configuration.
- */
 Hooks.once("init", () => {
   console.log(`${MODULE_ID} | Initializing`);
+  registerSettings();
 
-  // Register module settings
-  game.settings.register(MODULE_ID, "enabled", {
-    name: game.i18n.localize(`${MODULE_ID}.settings.enabled`),
-    hint: game.i18n.localize(`${MODULE_ID}.settings.enabledHint`),
-    scope: "world",
-    config: true,
-    type: Boolean,
-    default: true,
-  });
+  loadTemplates([`modules/${MODULE_ID}/templates/cockpit.hbs`]);
+
+  registerHooks();
 });
 
-/**
- * Module ready - world data is loaded, safe to access actors/items.
- */
 Hooks.once("ready", () => {
-  if (!game.settings.get(MODULE_ID, "enabled")) return;
+  if (!game.settings.get(MODULE_ID, SETTINGS.ENABLED)) return;
+
+  const moduleData = game.modules.get(MODULE_ID);
+  if (!moduleData) return;
+
+  moduleData.api = {
+    open: (actor) => openCockpitForActor(actor),
+    close: () => closeAllCockpits(),
+    isJackedIn,
+    setJackedIn,
+    isNetrunner,
+    getInterfaceRank,
+    getEquippedCyberdeck,
+    getNetRole,
+    getRezzedPrograms,
+    getActionsSpent,
+    getRemainingActions,
+    resetTurn,
+    setInterfaceRankOverride: (actor, value) =>
+      actor?.setFlag(MODULE_ID, FLAGS.INTERFACE_OVERRIDE, value),
+    clearInterfaceRankOverride: (actor) =>
+      actor?.unsetFlag(MODULE_ID, FLAGS.INTERFACE_OVERRIDE),
+  };
+
+  Hooks.callAll(`${MODULE_ID}.ready`, moduleData.api);
   console.log(`${MODULE_ID} | Ready`);
 });
