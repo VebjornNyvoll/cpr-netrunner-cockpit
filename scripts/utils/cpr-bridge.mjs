@@ -18,6 +18,21 @@ export function getInterfaceRank(actor) {
   return Number.parseInt(role.system?.rank, 10) || 0;
 }
 
+// CPR corebook p. 197: NET Actions per Turn by Interface Rank
+// 1-3 → 2, 4-6 → 3, 7-9 → 4, 10 → 5. Rank 0 = not a netrunner.
+export function netActionsForRank(rank) {
+  const r = Number.parseInt(rank, 10);
+  if (!Number.isFinite(r) || r < 1) return 0;
+  if (r >= 10) return 5;
+  if (r >= 7) return 4;
+  if (r >= 4) return 3;
+  return 2;
+}
+
+export function getMaxNetActions(actor) {
+  return netActionsForRank(getInterfaceRank(actor));
+}
+
 export function getEquippedCyberdeck(actor) {
   if (!actor) return null;
   if (typeof actor.getEquippedCyberdeck === "function") {

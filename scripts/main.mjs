@@ -8,6 +8,8 @@ import {
 } from "./apps/NetrunnerCockpit.mjs";
 import {
   getInterfaceRank,
+  getMaxNetActions,
+  netActionsForRank,
   getEquippedCyberdeck,
   getNetRole,
   getRezzedPrograms,
@@ -43,6 +45,8 @@ Hooks.once("ready", () => {
     setJackedIn,
     isNetrunner,
     getInterfaceRank,
+    getMaxNetActions,
+    netActionsForRank,
     getEquippedCyberdeck,
     getNetRole,
     getRezzedPrograms,

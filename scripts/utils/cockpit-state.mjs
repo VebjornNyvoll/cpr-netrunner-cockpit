@@ -1,5 +1,5 @@
 import { MODULE_ID, FLAGS } from "../constants.mjs";
-import { getInterfaceRank, isNetrunner } from "./cpr-bridge.mjs";
+import { getMaxNetActions, isNetrunner } from "./cpr-bridge.mjs";
 
 export function isJackedIn(actor) {
   return !!actor?.getFlag(MODULE_ID, FLAGS.JACKED_IN);
@@ -26,7 +26,7 @@ export async function setActionsSpent(actor, value) {
 }
 
 export function getRemainingActions(actor) {
-  return getInterfaceRank(actor) - getActionsSpent(actor);
+  return getMaxNetActions(actor) - getActionsSpent(actor);
 }
 
 export function getTurnLog(actor) {

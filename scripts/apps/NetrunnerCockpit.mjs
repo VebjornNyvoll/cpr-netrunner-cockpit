@@ -3,6 +3,7 @@ import {
   getEquippedCyberdeck,
   getInstalledPrograms,
   getInterfaceRank,
+  getMaxNetActions,
   getRezzedPrograms,
   isNetrunner,
 } from "../utils/cpr-bridge.mjs";
@@ -110,15 +111,16 @@ export class NetrunnerCockpit extends HandlebarsApplicationMixin(
 
   async _prepareContext(options) {
     const actor = this.actor;
-    const rank = actor ? getInterfaceRank(actor) : 0;
+    const interfaceRank = actor ? getInterfaceRank(actor) : 0;
+    const maxActions = actor ? getMaxNetActions(actor) : 0;
     const spent = getActionsSpent(actor);
-    const remaining = rank - spent;
+    const remaining = maxActions - spent;
     const jackedIn = isJackedIn(actor);
     const cyberdeck = getEquippedCyberdeck(actor);
     const rezzed = getRezzedPrograms(cyberdeck);
     const installed = getInstalledPrograms(cyberdeck);
 
-    const pips = Array.from({ length: Math.max(rank, 1) }, (_, i) => ({
+    const pips = Array.from({ length: Math.max(maxActions, 1) }, (_, i) => ({
       spent: i < spent,
     }));
 
@@ -163,7 +165,8 @@ export class NetrunnerCockpit extends HandlebarsApplicationMixin(
       jackedIn,
       hasCyberdeck: !!cyberdeck,
       cyberdeckName: cyberdeck?.name ?? "",
-      rank,
+      interfaceRank,
+      maxActions,
       spent,
       remaining,
       pips,

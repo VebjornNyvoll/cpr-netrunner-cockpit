@@ -23,10 +23,13 @@
     <div class="cockpit-counter-readout">
       <span class="cockpit-counter-remaining">{{remaining}}</span>
       <span class="cockpit-counter-slash">/</span>
-      <span class="cockpit-counter-total">{{rank}}</span>
+      <span class="cockpit-counter-total">{{maxActions}}</span>
     </div>
     <div class="cockpit-counter-label">
       {{localize "cpr-netrunner-cockpit.window.actionsRemaining"}}
+      <span class="cockpit-rank-hint" data-tooltip="{{localize 'cpr-netrunner-cockpit.window.rankTooltip'}}">
+        (Interface {{interfaceRank}})
+      </span>
     </div>
     <div class="cockpit-pips">
       {{#each pips}}
