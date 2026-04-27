@@ -41,6 +41,10 @@ https://github.com/VebjornNyvoll/cpr-netrunner-cockpit/releases/latest/download/
 - **Always show while jacked in** (client) — keeps the window open outside combat turns too
 - **Allow negative counter** (world) — disables the "out of actions" block on ability buttons
 
+## Keybindings
+
+- **Toggle Netrunner Cockpit** — default `Shift+J`. Opens the cockpit for your assigned netrunner, jacking in automatically if needed; press again to close. Rebind via *Configure Controls*. Targets in priority order: selected token's actor, your assigned `User.character`, then the first netrunner you own.
+
 ## Module API
 
 Exposed at `game.modules.get("cpr-netrunner-cockpit").api`:

@@ -54,7 +54,14 @@
       "noCyberdeck": "No equipped cyberdeck — equip a deck before rolling Interface abilities.",
       "notJackedIn": "Not jacked in — jack in from the character sheet or token HUD first.",
       "outOfActions": "No NET Actions remaining this turn.",
-      "jackedOut": "{name} has jacked out."
+      "jackedOut": "{name} has jacked out.",
+      "noNetrunnerFound": "No netrunner found — assign your character or select a netrunner token first."
+    },
+    "keybindings": {
+      "toggleCockpit": {
+        "name": "Toggle Netrunner Cockpit",
+        "hint": "Open the cockpit for your netrunner (jacks in automatically if needed). Press again to close. Defaults to Shift+J."
+      }
     },
     "abilities": {
       "scannerDesc": "Reveal all contents on the current floor.",

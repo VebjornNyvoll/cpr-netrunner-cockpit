@@ -1,6 +1,7 @@
 import { MODULE_ID, FLAGS, SETTINGS } from "./constants.mjs";
 import { registerSettings } from "./settings.mjs";
 import { registerHooks } from "./hooks.mjs";
+import { registerKeybindings } from "./keybindings.mjs";
 import {
   openCockpitForActor,
   getOpenCockpit,
@@ -26,6 +27,7 @@ import {
 Hooks.once("init", () => {
   console.log(`${MODULE_ID} | Initializing`);
   registerSettings();
+  registerKeybindings();
 
   loadTemplates([`modules/${MODULE_ID}/templates/cockpit.hbs`]);
 
